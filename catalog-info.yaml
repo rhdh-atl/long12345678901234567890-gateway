@@ -1,0 +1,68 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: long12345678901234567890-poi-gateway-app-dev
+  annotations:
+    argocd/app-name: long12345678901234567890-poi-gateway-app-dev
+    backstage.io/kubernetes-id: long12345678901234567890-poi-gateway-app
+    backstage.io/kubernetes-namespace: long12345678901234567890
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-atl/long12345678901234567890-gateway
+    janus-idp.io/tekton-enabled: 'true'
+  tags:
+    - java
+    - quarkus
+    - maven
+    - workshop
+  links:
+    - url: https://console-openshift-console.apps.j0i9yf30.eastus2.aroapp.io/dev-pipelines/ns/long12345678901234567890/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.j0i9yf30.eastus2.aroapp.io/k8s/ns/long12345678901234567890/deployments/long12345678901234567890-poi-gateway-app
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.j0i9yf30.eastus2.aroapp.io/#https://github.com/rhdh-atl/long12345678901234567890-gateway?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/ryanj"
+  system: workshop-system-long12345678901234567890
+  providesApis:
+    - gateway-api-long12345678901234567890
+  consumesApis:
+    - backend-api-long12345678901234567890
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-long12345678901234567890
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: "user:default/ryanj"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: gateway-api-long12345678901234567890
+  description: API surface exposed to interact with Backends (summit POIs + parks data) via the Gateway
+  links:
+    - url: http://long12345678901234567890-poi-gateway-app-long12345678901234567890.apps.j0i9yf30.eastus2.aroapp.io/q/swagger-ui
+      title: Swagger UI
+      icon: web
+    - url: https://github.com/rhdh-atl/long12345678901234567890-gateway/tree/main/src/main/resources/META-INF/openapi.yaml
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user:default/ryanj"
+  system: workshop-system-long12345678901234567890
+  definition:
+    $text: https://github.com/rhdh-atl/long12345678901234567890-gateway/tree/main/src/main/resources/META-INF/openapi.yaml
